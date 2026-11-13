@@ -1,30 +1,16 @@
-import re
-
-
-# Ввод функций
-def validate_email(email: str) -> bool:
-    pattern = r"^[\w.+-]+@[\w-]+\.[\w.-]+$"
-    return bool(re.match(pattern, email))
-
-
-def validate_phone(phone: str) -> bool:
-    pattern = r"^\+?7[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$"
-    return bool(re.match(pattern, phone))
-
-
-def validate_url(url: str) -> bool:
-    pattern = r"^https?://[\w.-]+\.[a-z]{2,}(/[\w./-]*)?$"
-    return bool(re.match(pattern, url))
-
-
-# Проверка
-tests = [
-    ("email", "ivan@example.com", validate_email),
-    ("email", "invalid@", validate_email),
-    ("phone", "+7 (999) 123-45-67", validate_phone),
-    ("url", "https://example.com", validate_url),
-    ("url", "not-a-url", validate_url),
+students = [
+    ("Иван", 25, 4.5),
+    ("Мария", 22, 4.85),
+    ("Пётр", 30, 4.2),
+    ("Анна", 20, 4.95),
 ]
-for type_, value, validator in tests:
-    result = "✓" if validator(value) else "✗"
-    print(f"[{result}] {type_}: {value}")
+# Заголовок
+print(f"{'Имя':<10} {'Возраст':>8} {'Балл':>8}")
+print("-" * 28)
+# Цикл для обработки данных
+for name, age, gpa in students:
+    print(f"{name:<10} {age:>8} {gpa:>8.2f}")
+# Итого
+print("-" * 28)
+avg_gpa = sum(s[2] for s in students) / len(students)
+print(f"{'Средний балл':<10} {'':>8} {avg_gpa:>8.2f}")
