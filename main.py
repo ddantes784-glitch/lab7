@@ -1,17 +1,18 @@
-import re
-# Ввод функции
-def is_palindrome(text: str) -> bool:
-    cleaned = re.sub(r'[^\w]', '', text.lower())
-    return cleaned == cleaned[::-1]
-# Примеры
-tests = [
-    "А роза упала на лапу Азора",
-    "Madam, I'm Adam",
-    "Hello, World!",
-    "12321",
-    "racecar"
-]
-# Проверка и вывод
-for text in tests:
-    result = "палиндром" if is_palindrome(text) else "не палиндром"
-    print(f"'{text}' — {result}")
+def caesar_cipher(text: str, shift: int) -> str:
+    result = []
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            shifted = (ord(char) - base + shift) % 26 + base
+            result.append(chr(shifted))
+        else:
+            result.append(char)
+    return "".join(result)
+# Шифрование
+original = "Hello, World!"
+encrypted = caesar_cipher(original, 3)
+print(f"Оригинал: {original}")
+print(f"Зашифровано: {encrypted}")
+# Расшифровка
+decrypted = caesar_cipher(encrypted, -3)
+print(f"Расшифровано: {decrypted}")
